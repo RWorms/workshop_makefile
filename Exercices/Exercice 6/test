@@ -1,15 +1,6 @@
 #!/bin/sh
 
-test= make
-if [ -z $test ]
-then
-    echo "test"
-else
-    echo $test
-fi
-
-
-test= make
+test=`make`
 if [ -z $test ] ; then
     echo "Test 1 'make' successfull"
 else
@@ -19,7 +10,7 @@ else
     exit 1
 fi
 
-test= make re
+test=`make re`
 if [ -z $test ] ; then
     echo "Test 2 'make re' successfull"
 else
@@ -29,7 +20,7 @@ else
     exit 1
 fi
 
-test= make clean
+test=`make clean`
 if [ -z $test ] ; then
     echo "Test 3 'make clean' successfull"
 else
@@ -39,7 +30,7 @@ else
     exit 1
 fi
 
-test= make fclean
+test=`make fclean`
 if [ -z $test ] ; then
     echo "Test 4 'make fclean' successfull"
 else
