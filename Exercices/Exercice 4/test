@@ -1,0 +1,19 @@
+#!/bin/sh
+
+make &>/dev/null
+if ./program1 && ./program2 ; then
+    echo "Test 1 'make' successfull"
+else
+    echo "Test 1 'make' failed"
+    exit 1
+fi
+
+make fclean &>/dev/null
+if find program1 &>/dev/null || find program2 &>/dev/null || find Project1/program1 &>/dev/null || find Project2/program2 &>/dev/null ; then
+    echo "Test 2 'make fclean' failed"
+    exit 4
+else
+    echo "Test 2 'make fclean' successfull"
+fi
+
+echo "Exercice 4 done"
