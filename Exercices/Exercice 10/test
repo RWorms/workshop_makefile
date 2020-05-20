@@ -8,28 +8,36 @@ else
     exit 1
 fi
 
-make re &>/dev/null
-if ./program ; then
-    echo "Test 2 'make re' successfull"
+echo "#ifndef HEADER_H_
+    #define HEADER_H_
+
+    #include <stdio.h>
+    #include <stdio.h>
+
+#endif
+" > header.h
+
+test=`make`
+make="make: Nothing to be done for 'all'."
+
+if [ "$test" != "$make" ]; then
+    echo "Test 2 'make' successfull"
 else
-    echo "Test 2 'make re' failed"
-    exit 2
+    echo "Test 2 'make' failed"
+    echo "#ifndef HEADER_H_
+        #define HEADER_H_
+
+        #include <stdio.h>
+
+    #endif
+    " > header.h
+    exit 1
 fi
 
-make clean &>/dev/null
-if find *.o &>/dev/null ; then
-    echo "Test 3 'make clean' failed"
-    exit 3
-else
-    echo "Test 3 'make clean' successfull"
-fi
+echo "#ifndef HEADER_H_
+    #define HEADER_H_
 
-make fclean &>/dev/null
-if find program &>/dev/null ; then
-    echo "Test 4 'make fclean' failed"
-    exit 4
-else
-    echo "Test 4 'make fclean' successfull"
-fi
+    #include <stdio.h>
 
-echo "Exercice 1 done"
+#endif
+" > header.h
