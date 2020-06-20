@@ -1,0 +1,50 @@
+#!/bin/sh
+
+red=`tput setaf 1`
+green=`tput setaf 2`
+reset=`tput sgr0`
+
+# make all
+
+make > /dev/null
+if ./a.out ; then
+    echo "make all:${green}OK${reset}"
+else
+    echo "make all:${red}KO${reset}"
+    exit 1
+fi
+
+# make re
+
+make re > /dev/null
+if ./a.out ; then
+    echo "make re:${green}OK${reset}"
+else
+    echo "make re:${red}KO${reset}"
+    exit 2
+fi
+
+#make clean
+
+make clean > /dev/null
+count=`find -name "*.o" 2>/dev/null | wc -l`
+if [ $count != 0 ]
+then
+    echo "make clean:${red}KO${reset}"
+    exit 3
+else
+    echo "make clean:${green}OK${reset}"
+fi
+
+#make fclean
+
+make fclean > /dev/null
+if [ ! -f "a.out" ]
+then
+    echo "make fclean:${green}OK${reset}"
+else
+    echo "make fclean:${red}KO${reset}"
+    exit 4
+fi
+
+exit 0

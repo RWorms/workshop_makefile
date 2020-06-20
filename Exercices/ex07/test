@@ -1,0 +1,35 @@
+#!/bin/sh
+
+red=`tput setaf 1`
+green=`tput setaf 2`
+reset=`tput sgr0`
+
+cp Makefile c/Makefile
+cd c
+
+if [ `./test ; echo $?` != 0 ]
+then
+    echo "c file:${red}KO${reset}"
+    rm -rf Makefile
+    exit 1
+else
+    echo "c file:${green}OK${reset}"
+    rm -rf Makefile
+fi
+
+cp ../Makefile ../cpp/Makefile
+cd ../cpp
+
+if [ `./test ; echo $?` != 0 ]
+then
+    echo "cpp file:${red}KO${reset}"
+    rm -rf Makefile
+    exit 2
+else
+    echo "cpp file:${green}OK${reset}"
+    rm -rf Makefile
+fi
+
+rm -rf cpp/Makefile
+
+cd ..
