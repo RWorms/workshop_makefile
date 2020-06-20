@@ -1,0 +1,47 @@
+#!/bin/sh
+
+red=`tput setaf 1`
+green=`tput setaf 2`
+reset=`tput sgr0`
+
+# make all
+
+test=`make`
+if [ ./a.out ] && [ -z $test ]; then
+    echo "make all:${green}OK${reset}"
+else
+    echo "make all:${red}KO${reset}"
+    exit 1
+fi
+
+# make re
+
+test=`make re`
+if [ ./a.out ] && [ -z $test ] ; then
+    echo "make re:${green}OK${reset}"
+else
+    echo "make re:${red}KO${reset}"
+    exit 2
+fi
+
+#make clean
+
+test=`make clean`
+if [ ! -z $test ]
+then
+    echo "make clean:${red}KO${reset}"
+    exit 3
+else
+    echo "make clean:${green}OK${reset}"
+fi
+
+#make fclean
+
+test=`make fclean`
+if [ ! -f "a.out" ] && [ -z $test ]
+then
+    echo "make fclean:${green}OK${reset}"
+else
+    echo "make fclean:${red}KO${reset}"
+    exit 4
+fi
