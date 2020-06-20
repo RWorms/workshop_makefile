@@ -6,12 +6,22 @@ reset=`tput sgr0`
 
 # make all
 
+count=`grep -o -i path/longpath/reallythatslong/franklyitstakingforever/arewethereyet/ Makefile | wc -l 2>/dev/null`
+
+if [ $count != 1 ]
+then
+    echo "Number of path:${red}KO${reset}"
+    exit 1
+else
+    echo "Number of path:${green}OK${reset}"
+fi
+
 make > /dev/null
 if ./a.out ; then
     echo "make all:${green}OK${reset}"
 else
     echo "make all:${red}KO${reset}"
-    exit 1
+    exit 2
 fi
 
 # make re
@@ -21,7 +31,7 @@ if ./a.out ; then
     echo "make re:${green}OK${reset}"
 else
     echo "make re:${red}KO${reset}"
-    exit 2
+    exit 3
 fi
 
 #make clean
@@ -31,7 +41,7 @@ count=`find -name "*.o" 2>/dev/null | wc -l`
 if [ $count != 0 ]
 then
     echo "make clean:${red}KO${reset}"
-    exit 3
+    exit 4
 else
     echo "make clean:${green}OK${reset}"
 fi
@@ -44,5 +54,5 @@ then
     echo "make fclean:${green}OK${reset}"
 else
     echo "make fclean:${red}KO${reset}"
-    exit 4
+    exit 5
 fi

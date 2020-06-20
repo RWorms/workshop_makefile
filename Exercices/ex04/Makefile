@@ -7,11 +7,6 @@ clean: Supprime tout les fichiers .o						\
 fclean: Supprime tout les fichiers .o ET le binaire			\
 re: appelle la règle fclean et all							\
 															\
-- Le Makefile ne doit rien efficher, excépté en cas d'erreur
+- Vous ne devez écrire qu'une seule fois le chemin vers les .c
 
-NAME	= a.out
-
-SRCS	= ./all.c \
-	  ./clean.c \
-	  ./fclean.c \
-	  ./re.c
+NAME	=	a.out
