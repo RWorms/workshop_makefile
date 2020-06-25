@@ -8,6 +8,9 @@ reset=`tput sgr0`
 
 count=`grep -o -i CFLAGS Makefile | wc -l 2>/dev/null`
 
+`make`
+make=`make`
+
 make > /dev/null
 if ./a.out ; then
     echo "make all:${green}OK${reset}"
@@ -28,7 +31,6 @@ echo "#ifndef HEADER_H_
 " > header.h
 
 test=`make`
-make="make: Nothing to be done for 'all'."
 
 if [ "$test" != "$make" ]; then
     echo "make after header modification:${green}OK${reset}"
